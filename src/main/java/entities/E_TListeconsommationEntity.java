@@ -5,18 +5,15 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "listeconsommation", schema = "ctppoo", catalog = "")
-@IdClass(E_TListeconsommationEntityPK.class)
 public class E_TListeconsommationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
     private int id;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
+    @Basic
     @Column(name = "repas_id", nullable = false)
     private int repasId;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
+    @Basic
     @Column(name = "aliments_id", nullable = false)
     private int alimentsId;
 
