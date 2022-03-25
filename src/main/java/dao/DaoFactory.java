@@ -6,16 +6,19 @@ import enums.PersistenceType;
 public abstract class DaoFactory {
 
     public abstract DaoAliments getDaoAliments();
+    public abstract DaoRepas getDaoRepas();
+
     public static DaoFactory getDaoFactory(PersistenceType type){
-        DaoFactory dao;
+        DaoFactory dao=null;
         if(type.equals(PersistenceType.JPA)){
             dao=new DaoFactoryJpa();
-            return dao;
-        }
-        else if (type.equals(PersistenceType.JSON)){
 
         }
-        return null;
+        else if (type.equals(PersistenceType.JSON)){
+            dao=new DaoFactoryJson();
+
+        }
+        return dao;
     }
 
 

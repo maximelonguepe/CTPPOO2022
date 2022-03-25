@@ -58,4 +58,9 @@ public class E_TAlimentsEntity {
                 ", description='" + description + '\'' +
                 '}';
     }
+
+    public E_TAlimentsEntity(int id, String description) {
+        this.id = id;
+        this.description = description;
+    }
 }

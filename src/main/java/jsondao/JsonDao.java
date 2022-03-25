@@ -139,12 +139,15 @@ public class JsonDao<T> implements Dao<T> {
             e.printStackTrace();
         }
         JSONArray array = (JSONArray) ob;
+        String objToJson= gson.toJson(obj);
+        JSONObject objectToJsonObject=gson.fromJson(objToJson,JSONObject.class);
+        Double idobj=(Double) objectToJsonObject.get("id");
         for (int i = 0; i < array.size(); i++) {
-            String objToJson= gson.toJson(obj);
 
-            T test= (T) gson.fromJson(objToJson,tClass);
-            JSONObject object = (JSONObject) array.get(i);
-            Long toto = (Long) object.get("id");
+            //T test= (T) gson.fromJson(objToJson,tClass);
+
+            //JSONObject object = (JSONObject) array.get(i);
+            //Long toto = (Long) object.get("id");
 
 
 

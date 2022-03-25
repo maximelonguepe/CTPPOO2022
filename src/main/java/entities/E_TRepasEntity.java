@@ -66,4 +66,10 @@ public class E_TRepasEntity {
     public int hashCode() {
         return Objects.hash(id, daterepas, heurerepas, typerepas);
     }
+
+    public E_TRepasEntity(Date daterepas, Time heurerepas, String typerepas) {
+        this.daterepas = daterepas;
+        this.heurerepas = heurerepas;
+        this.typerepas = typerepas;
+    }
 }
