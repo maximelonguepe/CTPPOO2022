@@ -33,12 +33,12 @@ public class JpaDao<T> implements Dao<T> {
     }
 
     @Override
-    public boolean create(T obj) {
+    public int create(T obj) {
         Transaction tx = null;
         tx = session.beginTransaction();
         Serializable id = session.save(obj);
         tx.commit();
-        return true;
+        return (int) id;
     }
     @Override
     public T find(Integer id,Class<T>tClass) {

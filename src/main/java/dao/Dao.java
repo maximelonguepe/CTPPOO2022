@@ -3,7 +3,7 @@ package dao;
 import java.util.List;
 
 public interface Dao<T>{
-    public boolean create(T obj) ;
+    public int create(T obj) ;
     public T find(Integer id,Class<T>tClass);
     public List<T> findAll(Class<T> tClass);
     public boolean update (T obj) ;

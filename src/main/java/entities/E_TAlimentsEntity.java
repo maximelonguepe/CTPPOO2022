@@ -50,4 +50,12 @@ public class E_TAlimentsEntity {
     public E_TAlimentsEntity(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "E_TAlimentsEntity{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

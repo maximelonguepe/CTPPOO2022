@@ -20,7 +20,7 @@ public class JsonDao<T> implements Dao<T> {
     }
 
     @Override
-    public boolean create(T obj) {
+    public int create(T obj) {
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
@@ -51,7 +51,7 @@ public class JsonDao<T> implements Dao<T> {
             e.printStackTrace();
         }
 
-        return true;
+        return 1;
     }
 
     @Override
