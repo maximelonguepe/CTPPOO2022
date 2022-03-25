@@ -119,7 +119,6 @@ public class JsonDao<T> implements Dao<T> {
 
     @Override
     public boolean update(T obj) {
-        Class<? extends Object> tClass=obj.getClass();
 
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
@@ -142,22 +141,97 @@ public class JsonDao<T> implements Dao<T> {
         String objToJson= gson.toJson(obj);
         JSONObject objectToJsonObject=gson.fromJson(objToJson,JSONObject.class);
         Double idobj=(Double) objectToJsonObject.get("id");
-        for (int i = 0; i < array.size(); i++) {
+        String description= (String) objectToJsonObject.get("description");
+        JSONArray array1=new JSONArray();
+        int i;
+        for (i = 0; i < array.size(); i++) {
 
             //T test= (T) gson.fromJson(objToJson,tClass);
 
-            //JSONObject object = (JSONObject) array.get(i);
-            //Long toto = (Long) object.get("id");
+            JSONObject object = (JSONObject) array.get(i);
+            Long idArrayObject = (Long) object.get("id");
 
+            Double idArrayObjectDouble = idArrayObject.doubleValue();
+
+
+            if(idArrayObjectDouble.equals(idobj)){
+                object.put("description",description);
+                array1.add(object);
+            }
+            else {
+                array1.add(object);
+            }
+            //array.remove(i);
+            FileWriter myWriter;
+            try {
+                myWriter = new FileWriter("src/main/resources/" + obj.getClass().getSimpleName() + ".json");
+                myWriter.write(array1.toJSONString());
+                myWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
 
         }
-        return false;
+        return true;
     }
 
     @Override
     public boolean delete(T obj) {
-        return false;
+
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+        file = new File("src/main/resources/" + obj.getClass().getSimpleName() + ".json");
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader(file));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Object ob = JSONValue.parse(br);
+        try {
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JSONArray array = (JSONArray) ob;
+        String objToJson= gson.toJson(obj);
+        JSONObject objectToJsonObject=gson.fromJson(objToJson,JSONObject.class);
+        Double idobj=(Double) objectToJsonObject.get("id");
+        String description= (String) objectToJsonObject.get("description");
+        JSONArray array1=new JSONArray();
+        int i;
+        for (i = 0; i < array.size(); i++) {
+
+            //T test= (T) gson.fromJson(objToJson,tClass);
+
+            JSONObject object = (JSONObject) array.get(i);
+            Long idArrayObject = (Long) object.get("id");
+
+            Double idArrayObjectDouble = idArrayObject.doubleValue();
+
+
+            if(idArrayObjectDouble.equals(idobj)){
+
+            }
+            else {
+                array1.add(object);
+            }
+            //array.remove(i);
+            FileWriter myWriter;
+            try {
+                myWriter = new FileWriter("src/main/resources/" + obj.getClass().getSimpleName() + ".json");
+                myWriter.write(array1.toJSONString());
+                myWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+        return true;
     }
 
     @Override
@@ -165,7 +239,7 @@ public class JsonDao<T> implements Dao<T> {
         FileWriter myWriter;
         try {
             myWriter = new FileWriter("src/main/resources/" + tClass.getSimpleName() + ".json");
-            myWriter.write("");
+            myWriter.write("[]");
             myWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
