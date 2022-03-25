@@ -14,6 +14,10 @@ public class E_TAlimentsEntity {
     @Column(name = "Description", nullable = true, length = 45)
     private String description;
 
+    public E_TAlimentsEntity() {
+
+    }
+
     public int getId() {
         return id;
     }
@@ -41,5 +45,9 @@ public class E_TAlimentsEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id, description);
+    }
+
+    public E_TAlimentsEntity(String description) {
+        this.description = description;
     }
 }
